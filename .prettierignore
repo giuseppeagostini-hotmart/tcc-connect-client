@@ -1,0 +1,6 @@
+!.storybook
+!.jest
+build
+node_modules
+.github
+next-env.d.ts
