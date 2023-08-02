@@ -1,3 +1,4 @@
+const MAX_PARAM = 10
 module.exports = {
   env: {
     browser: true,
@@ -48,7 +49,7 @@ module.exports = {
     complexity: ['error', { max: 9 }],
     'max-lines': ['error', { max: 200, skipComments: true, skipBlankLines: true }],
     'no-implicit-coercion': ['error', { allow: ['!!'] }],
-    'max-params': ['error', 10],
+    'max-params': ['error', MAX_PARAM],
     'no-console': ['error', { allow: ['error'] }],
     'no-magic-numbers': 'off',
     'no-irregular-whitespace': ['error', { skipTemplates: true }],
