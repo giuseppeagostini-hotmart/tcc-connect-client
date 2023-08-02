@@ -5,7 +5,7 @@ import { describe, it } from 'vitest'
 import { WrappedApp, App } from './App'
 
 describe('App', () => {
-  it('Renders hello worldd', () => {
+  it('Renders hello world', () => {
     // ARRANGE
     render(<WrappedApp />)
     // ACT

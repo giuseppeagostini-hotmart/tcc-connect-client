@@ -11,7 +11,8 @@
     "test": "vitest",
     "lint": "eslint --ext .js,.cjs,.ts,.tsx .",
     "lint:fix": "eslint --ext .js,.cjs,.ts,.tsx . --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepush": "yarn typecheck && yarn lint"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.32.1",
