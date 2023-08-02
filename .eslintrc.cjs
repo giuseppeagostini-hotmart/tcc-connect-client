@@ -65,6 +65,7 @@ module.exports = {
     'react/display-name': 'off',
     'react/jsx-boolean-value': ['error', 'never'],
     'react/jsx-closing-bracket-location': 'off',
+    'react/function-component-definition': 'off',
     'react/jsx-wrap-multilines': [
       'error',
       {
@@ -106,6 +107,7 @@ module.exports = {
 
     /* Import */
     'sort-imports': 'off',
+    'import/prefer-default-export': 'off',
     'import/order': [
       'error',
       {
