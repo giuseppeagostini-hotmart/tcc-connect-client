@@ -1,11 +1,10 @@
 import { lazy, Suspense } from 'react'
 
+import RoutesPaths from '@src/core/routes/constants'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-import RoutesPaths from './constants'
-
-const Home = lazy(() => import('../../pages/Home'))
-const NotFound = lazy(() => import('../../pages/NotFound'))
+const Home = lazy(() => import('@src/pages/Home'))
+const NotFound = lazy(() => import('@src/pages/NotFound'))
 
 const Router = () => {
   return (

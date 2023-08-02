@@ -1,6 +1,6 @@
+import type ApiError from '@src/config/request/error'
 import type { UseQueryOptions } from '@tanstack/react-query'
 import { useQueryClient, useQuery } from '@tanstack/react-query'
-import type ApiError from 'src/config/request/error'
 
 export type Fetcher<Response> = () => Response | Promise<Response>
 
