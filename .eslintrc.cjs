@@ -174,12 +174,6 @@ module.exports = {
             skipComments: true,
             skipBlankLines: true
           }
-        ],
-        'jest/prefer-lowercase-title': [
-          'error',
-          {
-            ignore: ['describe']
-          }
         ]
       }
     }
