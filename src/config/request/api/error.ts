@@ -4,7 +4,7 @@ type Error = {
   message: string
   headers?: Record<string, string>
   extra?: unknown
-  code?: unknown
+  code?: string
 }
 
 class ApiError {
@@ -16,7 +16,7 @@ class ApiError {
 
   private _extra?: unknown
 
-  private _code?: unknown
+  private _code?: string
 
   constructor({ statusCode, message, headers, extra, code }: Error) {
     this._statusCode = statusCode

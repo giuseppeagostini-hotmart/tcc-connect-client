@@ -1,4 +1,4 @@
-import type ApiError from '@src/config/request/error'
+import type { ApiError } from '@src/config/request'
 import type { UseQueryOptions } from '@tanstack/react-query'
 import { useQueryClient, useQuery } from '@tanstack/react-query'
 

@@ -1,6 +1,7 @@
 import HttpCodes from '@src/common/constants/httpCodes'
-import type ApiError from '@src/config/request/error'
 import { QueryClient } from '@tanstack/react-query'
+
+import type { ApiError } from './api'
 
 const DEFAULT_STALE_TIME_IN_MINUTES = 30
 const ONE_MINUTE_IN_SECONDS = 60

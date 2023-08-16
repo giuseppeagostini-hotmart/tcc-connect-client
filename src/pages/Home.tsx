@@ -1,7 +1,14 @@
-import { DatePicker } from 'antd'
-
 function Home() {
-  return <DatePicker />
+  return (
+    <>
+      <div>
+        <p>Giuseppe</p>
+      </div>
+      <div>
+        <p>Matheus</p>
+      </div>
+    </>
+  )
 }
 
 export default Home

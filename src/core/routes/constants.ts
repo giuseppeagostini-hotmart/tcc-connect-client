@@ -1,6 +1,8 @@
 enum RoutesPaths {
-  Home = '/',
-  NotFound = '/notfound'
+  Home = '/home',
+  NotFound = '/notfound',
+  Login = '/login',
+  Signup = '/signup'
 }
 
 export default RoutesPaths
