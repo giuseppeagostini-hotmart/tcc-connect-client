@@ -20,3 +20,9 @@ export const getIsLogged = async () => {
 
   return res.status === HttpCodes.OK
 }
+
+export const getLogout = async () => {
+  const res = await api.get(AuthEndpoints.getLogout(), { withCredentials: true })
+
+  return res.status === HttpCodes.OK
+}
