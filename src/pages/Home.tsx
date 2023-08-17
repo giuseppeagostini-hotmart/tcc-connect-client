@@ -21,7 +21,7 @@ function Home() {
   return (
     <>
       <div>
-        <p>Giuseppe</p>
+        <p className='text-blue-900'>Giuseppe</p>
       </div>
       <div>
         <p>Matheus</p>
