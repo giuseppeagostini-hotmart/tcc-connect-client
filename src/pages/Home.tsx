@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import useLogout from '@src/auth/hooks/useLogout/useLogout'
 import { Button } from 'antd'
 
