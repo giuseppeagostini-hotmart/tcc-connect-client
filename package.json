@@ -15,7 +15,6 @@
     "prepush": "yarn typecheck && yarn lint"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.2.0",
     "@tanstack/react-query": "^4.32.1",
     "@tanstack/react-query-devtools": "^4.32.1",
     "@types/auth0": "^3.3.3",
