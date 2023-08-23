@@ -2,8 +2,11 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import loginImage from '@src/assets/loginPage.jpeg'
 import useLogin from '@src/auth/hooks/useLogin/useLogin'
 import useSignup from '@src/auth/hooks/useSignup/useSignup'
+import ScreenSizes from '@src/common/constants/screenSizes'
+import { useMediaQuery } from '@src/common/hooks/useMediaQuery'
 import { Button, Form, Input, notification, Image, Typography, Divider, Checkbox } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
+import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
 
 import LoginHeader from '../loginPage/components/loginHeader'
@@ -15,6 +18,7 @@ type FormsValue = {
 }
 
 const SignupPage = () => {
+  const isMobile = useMediaQuery(`(max-width: ${ScreenSizes.sm})`)
   const { mutate: mutateSignup, isLoading: isLoadingSignup } = useSignup()
   const { mutate: mutateLogin, isLoading: isLoadingLogin } = useLogin()
   const [api, contextHolder] = notification.useNotification()
@@ -56,12 +60,21 @@ const SignupPage = () => {
     )
   }
 
+  const classNameGrid = clsx('h-full w-full ', {
+    'grid grid-cols-2': !isMobile
+  })
+
+  const classNameContainerPage = clsx('py-16', {
+    'px-8': isMobile,
+    'px-24': !isMobile
+  })
+
   return (
     <>
       {contextHolder}
-      <div className='grid grid-cols-2 h-full w-full'>
-        <Image src={loginImage} preview={false} height='100%' />
-        <div className='py-16 px-24'>
+      <div className={classNameGrid}>
+        {!isMobile && <Image src={loginImage} preview={false} height='100%' />}
+        <div className={classNameContainerPage}>
           <LoginHeader description='Bem vindo ao TCC Connect' />
           <Form
             name='normal_login'

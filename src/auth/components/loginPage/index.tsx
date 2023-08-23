@@ -1,8 +1,11 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import loginImage from '@src/assets/loginPage.jpeg'
 import useLogin from '@src/auth/hooks/useLogin/useLogin'
+import ScreenSizes from '@src/common/constants/screenSizes'
+import { useMediaQuery } from '@src/common/hooks/useMediaQuery'
 import { Button, Form, Input, notification, Image, Divider, Typography } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
+import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
 
 import LoginHeader from './components/loginHeader'
@@ -13,6 +16,7 @@ type FormsValue = {
 }
 
 const LoginPage = () => {
+  const isMobile = useMediaQuery(`(max-width: ${ScreenSizes.sm})`)
   const { mutate: mutateLogin, isLoading } = useLogin()
   const [api, contextHolder] = notification.useNotification()
   const navigate = useNavigate()
@@ -43,12 +47,21 @@ const LoginPage = () => {
     )
   }
 
+  const classNameGrid = clsx('h-full w-full ', {
+    'grid grid-cols-2': !isMobile
+  })
+
+  const classNameContainerPage = clsx('py-20', {
+    'px-8': isMobile,
+    'px-24': !isMobile
+  })
+
   return (
     <>
       {contextHolder}
-      <div className='grid grid-cols-2 h-full w-full'>
-        <Image src={loginImage} preview={false} height='100%' />
-        <div className='py-20 px-24'>
+      <div className={classNameGrid}>
+        {!isMobile && <Image src={loginImage} preview={false} height='100%' />}
+        <div className={classNameContainerPage}>
           <LoginHeader description='Seja bem vindo novamente!' />
           <Form
             name='normal_login'
