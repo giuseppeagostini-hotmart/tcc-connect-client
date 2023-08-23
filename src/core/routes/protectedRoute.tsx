@@ -1,18 +1,22 @@
-import type { FC, ReactNode } from 'react'
+import React from 'react'
 
 import useIsLogged from '@src/auth/hooks/useIsLogged/useIsLogged'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 type ProtectedRouteProps = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
-export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
+export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { data } = useIsLogged()
+  const navigate = useNavigate()
 
   if (!data) {
-    return <Navigate to='/login' />
+    navigate('/login')
+
+    return null
   }
 
-  return children
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>
 }

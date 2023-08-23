@@ -1,6 +1,5 @@
+import { whenRequestWithError, whenResponseWithError } from '@src/config/request/api/interceptors'
 import axios from 'axios'
-
-import { whenRequestWithError, whenResponseWithError } from './interceptors'
 
 const api = axios.create()
 
