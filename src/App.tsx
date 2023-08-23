@@ -13,7 +13,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ParentInfoProvider user={user as User}>
-        <BrowserRouter>
+        <BrowserRouter basename='/tcc-connect-client'>
           <Router />
         </BrowserRouter>
       </ParentInfoProvider>
