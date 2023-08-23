@@ -5,7 +5,7 @@ import queryClient from '@src/config/request/queryClient'
 import Router from '@src/core/routes/router'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 
 const App = () => {
   const { user } = useAuth()
@@ -13,9 +13,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ParentInfoProvider user={user as User}>
-        <BrowserRouter basename='/tcc-connect-client'>
+        <HashRouter>
           <Router />
-        </BrowserRouter>
+        </HashRouter>
       </ParentInfoProvider>
       <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
     </QueryClientProvider>
