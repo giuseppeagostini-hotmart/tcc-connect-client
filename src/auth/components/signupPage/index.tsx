@@ -24,10 +24,18 @@ const SignupPage = () => {
   const [api, contextHolder] = notification.useNotification()
   const navigate = useNavigate()
 
-  const openNotification = (placement: NotificationPlacement, error: string) => {
+  const openNotificationError = (placement: NotificationPlacement, error: string) => {
     api.error({
       message: `Ops, nao foi possivel realizar o cadastro`,
       description: error,
+      placement
+    })
+  }
+
+  const openNotificationSuccess = (placement: NotificationPlacement) => {
+    api.success({
+      message: `Conta criada com sucesso!`,
+      description: 'Seja bem vindo ao TCC Connect',
       placement
     })
   }
@@ -41,6 +49,7 @@ const SignupPage = () => {
       { password: values.password, email: values.email, isProfessor: values.isProfessor ?? false },
       {
         onSuccess() {
+          openNotificationSuccess('bottomRight')
           mutateLogin(
             { password: values.password, email: values.email },
             {
@@ -48,13 +57,13 @@ const SignupPage = () => {
                 navigate('/home')
               },
               onError(error) {
-                openNotification('bottomRight', error.message)
+                openNotificationError('bottomRight', error.message)
               }
             }
           )
         },
         onError(error) {
-          openNotification('bottomRight', error.message)
+          openNotificationError('bottomRight', error.message)
         }
       }
     )
