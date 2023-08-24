@@ -1,22 +1,15 @@
 /* eslint-disable no-console */
-import useLogout from '@src/auth/hooks/useLogout/useLogout'
+import { useAuth } from '@src/app/hooks/useAuth/useAuth'
 import { Button } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
-  const { mutate: logoutMutate } = useLogout()
+  const { signOut } = useAuth()
+  const navigate = useNavigate()
 
   const handleClick = () => {
-    logoutMutate(
-      {},
-      {
-        onSuccess() {
-          window.location.reload()
-        },
-        onError() {
-          console.log('deu erro')
-        }
-      }
-    )
+    signOut()
+    navigate('login')
   }
 
   return (

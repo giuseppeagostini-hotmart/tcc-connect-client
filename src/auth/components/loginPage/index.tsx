@@ -1,9 +1,10 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { useAuth } from '@src/app/hooks/useAuth/useAuth'
 import loginImage from '@src/assets/loginPage.jpeg'
 import useLogin from '@src/auth/hooks/useLogin/useLogin'
 import ScreenSizes from '@src/common/constants/screenSizes'
 import { useMediaQuery } from '@src/common/hooks/useMediaQuery'
-import { Button, Form, Input, notification, Image, Divider, Typography } from 'antd'
+import { Button, Form, Input, Image, Divider, Typography, notification } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
@@ -17,13 +18,14 @@ type FormsValue = {
 
 const LoginPage = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSizes.sm})`)
-  const { mutate: mutateLogin, isLoading } = useLogin()
+  const { mutate: mutateLogin, isLoading: isLoadingLogin } = useLogin()
   const [api, contextHolder] = notification.useNotification()
+  const { signIn } = useAuth()
   const navigate = useNavigate()
 
-  const openNotification = (placement: NotificationPlacement, error: string) => {
+  const openNotificationError = (placement: NotificationPlacement, error: string) => {
     api.error({
-      message: `Ops, não foi possivel realizar o login`,
+      message: `Ops, nao foi possivel realizar o cadastro`,
       description: error,
       placement
     })
@@ -37,11 +39,12 @@ const LoginPage = () => {
     mutateLogin(
       { password: values.password, email: values.email },
       {
-        onSuccess() {
+        onSuccess(data) {
+          signIn({ user: data.data.findUser, token: data.data.tokenData.token })
           navigate('/home')
         },
         onError(error) {
-          openNotification('bottomRight', error.message)
+          openNotificationError('bottomRight', error.message)
         }
       }
     )
@@ -101,7 +104,7 @@ const LoginPage = () => {
                 htmlType='submit'
                 shape='round'
                 className='login-form-button'
-                loading={isLoading}
+                loading={isLoadingLogin}
                 style={{ paddingRight: '5rem', paddingLeft: '5rem' }}>
                 Entrar
               </Button>

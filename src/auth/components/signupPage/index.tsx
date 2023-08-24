@@ -1,4 +1,5 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { useAuth } from '@src/app/hooks/useAuth/useAuth'
 import loginImage from '@src/assets/loginPage.jpeg'
 import useLogin from '@src/auth/hooks/useLogin/useLogin'
 import useSignup from '@src/auth/hooks/useSignup/useSignup'
@@ -19,6 +20,7 @@ type FormsValue = {
 
 const SignupPage = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSizes.sm})`)
+  const { signIn } = useAuth()
   const { mutate: mutateSignup, isLoading: isLoadingSignup } = useSignup()
   const { mutate: mutateLogin, isLoading: isLoadingLogin } = useLogin()
   const [api, contextHolder] = notification.useNotification()
@@ -53,7 +55,8 @@ const SignupPage = () => {
           mutateLogin(
             { password: values.password, email: values.email },
             {
-              onSuccess() {
+              onSuccess(data) {
+                signIn({ user: data.data.findUser, token: data.data.tokenData.token })
                 navigate('/home')
               },
               onError(error) {

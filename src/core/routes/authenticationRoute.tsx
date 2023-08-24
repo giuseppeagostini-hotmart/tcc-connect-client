@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import useIsLogged from '@src/auth/hooks/useIsLogged/useIsLogged'
+import { useAuth } from '@src/app/hooks/useAuth/useAuth'
 import { useNavigate } from 'react-router-dom'
 
 type AuthenticationRouteProps = {
@@ -8,14 +8,14 @@ type AuthenticationRouteProps = {
 }
 
 export const AuthenticationRoute = ({ children }: AuthenticationRouteProps) => {
-  const { data } = useIsLogged()
+  const { signed } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (data) {
+    if (signed) {
       navigate('/home')
     }
-  }, [data, navigate])
+  }, [signed, navigate])
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>
