@@ -17,3 +17,7 @@ export const AuthEndpoints = {
   getIsLogged: `${baseURL}${AuthUtil.logged}`,
   getLogout: `${baseURL}${AuthUtil.logout}`
 }
+
+export const UsersEndpoint = {
+  users: `${baseURL}/users`
+}

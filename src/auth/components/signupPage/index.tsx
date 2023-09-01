@@ -1,6 +1,6 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { useAuth } from '@src/app/hooks/useAuth/useAuth'
 import loginImage from '@src/assets/loginPage.jpeg'
+import { useAuthStore } from '@src/auth/hooks/useAuthStore/useAuthStore'
 import useLogin from '@src/auth/hooks/useLogin/useLogin'
 import useSignup from '@src/auth/hooks/useSignup/useSignup'
 import ScreenSizes from '@src/common/constants/screenSizes'
@@ -20,7 +20,10 @@ type FormsValue = {
 
 const SignupPage = () => {
   const isMobile = useMediaQuery(`(max-width: ${ScreenSizes.sm})`)
-  const { signIn } = useAuth()
+  const { dispatchUser, dispatchToken } = useAuthStore((state) => ({
+    dispatchToken: state.dispatchToken,
+    dispatchUser: state.dispatchUser
+  }))
   const { mutate: mutateSignup, isLoading: isLoadingSignup } = useSignup()
   const { mutate: mutateLogin, isLoading: isLoadingLogin } = useLogin()
   const [api, contextHolder] = notification.useNotification()
@@ -56,7 +59,8 @@ const SignupPage = () => {
             { password: values.password, email: values.email },
             {
               onSuccess(data) {
-                signIn({ user: data.data.findUser, token: data.data.tokenData.token })
+                dispatchUser(data.data.findUser)
+                dispatchToken(data.data.tokenData.token)
                 navigate('/home')
               },
               onError(error) {

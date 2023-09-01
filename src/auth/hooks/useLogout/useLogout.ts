@@ -1,6 +1,7 @@
-import { getLogout } from '@src/auth/client/authClient'
-import { useMutation } from '@src/common/hooks/useMutation'
+import { useAuthStore } from '../useAuthStore/useAuthStore'
 
-const useLogout = () => useMutation(() => getLogout())
+const useLogout = () => {
+  return useAuthStore((state) => state.reset)
+}
 
 export default useLogout

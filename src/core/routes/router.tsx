@@ -6,7 +6,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthenticationRoute } from './authenticationRoute'
 import { ProtectedRoute } from './protectedRoute'
 
-const Home = lazy(() => import('@src/pages/Home'))
+const Home = lazy(() => import('@src/pages/components/Home'))
 const NotFound = lazy(() => import('@src/pages/NotFound'))
 const LoginPage = lazy(() => import('@src/auth/components/loginPage'))
 const SignupPage = lazy(() => import('@src/auth/components/signupPage'))
