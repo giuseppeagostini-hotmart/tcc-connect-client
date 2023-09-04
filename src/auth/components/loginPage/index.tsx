@@ -1,5 +1,5 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import loginImage from '@src/assets/loginPage.jpeg'
+import loginImage from '@src/assets/ideogramm.jpeg'
 import { useAuthStore } from '@src/auth/hooks/useAuthStore/useAuthStore'
 import useLogin from '@src/auth/hooks/useLogin/useLogin'
 import ScreenSizes from '@src/common/constants/screenSizes'
