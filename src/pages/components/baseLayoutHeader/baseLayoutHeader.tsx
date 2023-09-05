@@ -1,4 +1,5 @@
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import logo from '@src/assets/logoo.png'
 import useLogout from '@src/auth/hooks/useLogout/useLogout'
 import { getItem } from '@src/common/utils'
 import { Avatar, Dropdown, Layout, Space, theme } from 'antd'
@@ -33,8 +34,18 @@ const BaseLayoutHeader: React.FC = () => {
 
   return (
     <Header style={{ padding: 0, background: colorBgContainer }}>
-      <div style={{ display: 'flex', justifyContent: 'end', marginRight: '1rem' }}>
-        <Dropdown menu={{ items: AVATAR_ITEMS, onClick: handleClick }} trigger={['click']}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}>
+        <div className='ml-4 items-center flex'>
+          <img src={logo} alt='logo tcc connect' width='100px' height='30px' />
+        </div>
+        <Dropdown
+          className='mr-4'
+          menu={{ items: AVATAR_ITEMS, onClick: handleClick }}
+          trigger={['click']}>
           <Space wrap size={16}>
             <Avatar icon={<UserOutlined />} />
           </Space>

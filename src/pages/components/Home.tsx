@@ -12,6 +12,7 @@ import { getItem } from '@src/common/utils'
 import { Layout, Menu, theme } from 'antd'
 
 import BaseLayoutHeader from './baseLayoutHeader/baseLayoutHeader'
+import ContentHome from './contentHome/contentHome'
 import SideMenu from './sideMenu/sideMenu'
 import type { MenuItem } from './types'
 
@@ -46,8 +47,14 @@ const App: React.FC = () => {
       <Layout>
         <BaseLayoutHeader />
         <Content style={{ margin: '20px 16px' }}>
-          <div style={{ padding: 24, minHeight: '100%', background: colorBgContainer }}>
-            Bem vindo ao TCC Connect! Bem vindo ao TCC Connect!
+          <div
+            style={{
+              padding: 24,
+              minHeight: '100%',
+              background: colorBgContainer,
+              borderRadius: '8px'
+            }}>
+            <ContentHome />
           </div>
         </Content>
         <Footer style={{ textAlign: 'center', padding: 0 }}>
