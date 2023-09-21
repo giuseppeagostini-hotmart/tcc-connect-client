@@ -10,7 +10,7 @@ import { getItem } from '@src/common/utils'
 import RoutesPaths from '@src/core/routes/constants'
 import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import type { MenuItem } from '../types'
 
@@ -36,6 +36,7 @@ interface MenuAntdProps {
 const MenuAntd = ({ mode }: MenuAntdProps) => {
   const user = useAuthStore((state) => state.user)
   const navigate = useNavigate()
+  const location = useLocation()
 
   const onClick: MenuProps['onClick'] = (e) => {
     navigate(e.key)
@@ -45,7 +46,7 @@ const MenuAntd = ({ mode }: MenuAntdProps) => {
     <Menu
       onClick={onClick}
       theme='dark'
-      defaultSelectedKeys={[RoutesPaths.Home]}
+      defaultSelectedKeys={[location.pathname]}
       mode={mode}
       items={user?.isProfessor ? professorItems : studentItems}
     />
