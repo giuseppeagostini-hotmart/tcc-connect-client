@@ -9,7 +9,7 @@ const MAX_LENGHT = 15
 
 interface TagsProps {
   tags: string[]
-  setTags: (param) => void
+  setTags: (param: string[]) => void
 }
 
 const Tags = ({ tags, setTags }: TagsProps) => {
