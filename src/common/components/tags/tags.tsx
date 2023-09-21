@@ -9,7 +9,7 @@ const MAX_LENGHT = 15
 
 interface TagsProps {
   tags: string[]
-  setTags: (param: string[]) => void
+  setTags: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 const Tags = ({ tags, setTags }: TagsProps) => {
