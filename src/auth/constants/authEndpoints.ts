@@ -19,5 +19,6 @@ export const AuthEndpoints = {
 }
 
 export const UsersEndpoint = {
-  users: `${baseURL}/users`
+  users: `${baseURL}/users`,
+  updateUser: `${baseURL}/users/:id`
 }

@@ -1,7 +1,7 @@
 import HttpCodes from '@src/common/constants/httpCodes'
 import api from '@src/config/request'
 
-import { AuthEndpoints, UsersEndpoint } from '../constants/authEndpoints'
+import { AuthEndpoints } from '../constants/authEndpoints'
 
 export const login = async (payload: unknown) => {
   const res = await api.post(AuthEndpoints.login, payload, { withCredentials: true })
@@ -25,10 +25,4 @@ export const getLogout = async () => {
   const res = await api.get(AuthEndpoints.getLogout, { withCredentials: true })
 
   return res.status === HttpCodes.OK
-}
-
-export const getUsers = async () => {
-  const res = await api.get(UsersEndpoint.users, { withCredentials: true })
-
-  return res.data
 }

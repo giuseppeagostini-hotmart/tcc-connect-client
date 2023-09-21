@@ -6,3 +6,10 @@ export const getUsers = async () => {
 
   return res.data
 }
+
+export const updateUser = async (id: string, payload: unknown) => {
+  const url = UsersEndpoint.updateUser.replace(':id', id)
+  const res = await api.put(url, payload, { withCredentials: true })
+
+  return res.data
+}

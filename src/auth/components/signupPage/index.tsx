@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import loginImage from '@src/assets/ideogramm.jpeg'
 import { useAuthStore } from '@src/auth/hooks/useAuthStore/useAuthStore'
@@ -5,7 +7,8 @@ import useLogin from '@src/auth/hooks/useLogin/useLogin'
 import useSignup from '@src/auth/hooks/useSignup/useSignup'
 import ScreenSizes from '@src/common/constants/screenSizes'
 import { useMediaQuery } from '@src/common/hooks/useMediaQuery'
-import { Button, Form, Input, notification, Image, Typography, Divider, Checkbox } from 'antd'
+import type { RadioChangeEvent } from 'antd'
+import { Button, Form, Input, notification, Image, Typography, Divider, Radio } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
@@ -28,6 +31,7 @@ const SignupPage = () => {
   const { mutate: mutateLogin, isLoading: isLoadingLogin } = useLogin()
   const [api, contextHolder] = notification.useNotification()
   const navigate = useNavigate()
+  const [value, setValue] = useState(1)
 
   const openNotificationError = (placement: NotificationPlacement, error: string) => {
     api.error({
@@ -51,7 +55,7 @@ const SignupPage = () => {
 
   const handleClick = (values: FormsValue) => {
     mutateSignup(
-      { password: values.password, email: values.email, isProfessor: values.isProfessor ?? false },
+      { password: values.password, email: values.email, isProfessor: value === 1 },
       {
         onSuccess() {
           openNotificationSuccess('bottomRight')
@@ -84,6 +88,10 @@ const SignupPage = () => {
     'px-8': isMobile,
     'px-24': !isMobile
   })
+
+  const onChange = (e: RadioChangeEvent) => {
+    setValue(e.target.value)
+  }
 
   return (
     <>
@@ -122,9 +130,10 @@ const SignupPage = () => {
               />
             </Form.Item>
 
-            <Form.Item name='isProfessor' valuePropName='checked'>
-              <Checkbox>Sou professor</Checkbox>
-            </Form.Item>
+            <Radio.Group className='ml-1' onChange={onChange} value={value}>
+              <Radio value={1}>Sou professor</Radio>
+              <Radio value={2}>Sou Aluno</Radio>
+            </Radio.Group>
 
             <Form.Item className='flex justify-center mt-6 mb-4'>
               <Button

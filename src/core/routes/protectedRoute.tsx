@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import useAuthorization from '@src/auth/hooks/useAuthorization/useAuthorization'
-import { useNavigate } from 'react-router-dom'
+import BaseLayout from '@src/pages/components/baseLayout/baseLayout'
+import { Outlet, useNavigate } from 'react-router-dom'
 
-type ProtectedRouteProps = {
-  children: React.ReactNode
-}
-
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+export const ProtectedRoute = () => {
   const { isLogged } = useAuthorization()
   const navigate = useNavigate()
 
@@ -17,6 +14,9 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     }
   }, [isLogged, navigate])
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{children}</>
+  return (
+    <BaseLayout>
+      <Outlet />
+    </BaseLayout>
+  )
 }
