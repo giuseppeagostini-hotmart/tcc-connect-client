@@ -3,7 +3,8 @@ import {
   FileTextOutlined,
   UserOutlined,
   SearchOutlined,
-  QuestionCircleOutlined
+  QuestionCircleOutlined,
+  UserSwitchOutlined
 } from '@ant-design/icons'
 import { useAuthStore } from '@src/auth/hooks/useAuthStore/useAuthStore'
 import { getItem } from '@src/common/utils'
@@ -22,9 +23,10 @@ export const professorItems: MenuItem[] = [
 
 const studentItems: MenuItem[] = [
   getItem('Inicio', RoutesPaths.Home, <SmileOutlined />),
+  getItem('Conectar', RoutesPaths.Connect, <UserSwitchOutlined />),
   getItem('Projeto', RoutesPaths.Project, <FileTextOutlined />),
   getItem('Conexões', RoutesPaths.Connections, <UserOutlined />, [
-    getItem('Buscar', RoutesPaths.ConnectionsSearch, <SearchOutlined />),
+    getItem('Vizualizar', RoutesPaths.ConnectionsSearch, <SearchOutlined />),
     getItem('Pendentes', RoutesPaths.ConnectionsPending, <QuestionCircleOutlined />)
   ])
 ]
@@ -46,7 +48,7 @@ const MenuAntd = ({ mode }: MenuAntdProps) => {
     <Menu
       onClick={onClick}
       theme='dark'
-      defaultSelectedKeys={[location.pathname]}
+      selectedKeys={[location.pathname]}
       mode={mode}
       items={user?.isProfessor ? professorItems : studentItems}
     />

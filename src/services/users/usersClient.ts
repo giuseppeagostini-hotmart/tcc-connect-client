@@ -13,3 +13,9 @@ export const updateUser = async (id: string, payload: unknown) => {
 
   return res.data
 }
+
+export const getProfessor = async () => {
+  const res = await api.get(UsersEndpoint.getProfessor, { withCredentials: true })
+
+  return res.data
+}

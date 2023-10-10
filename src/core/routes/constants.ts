@@ -4,6 +4,7 @@ enum RoutesPaths {
   Login = '/login',
   Signup = '/signup',
   Project = '/project',
+  Connect = '/connect',
   Connections = '/connections',
   ConnectionsSearch = '/connections/search',
   ConnectionsPending = '/connections/pending'

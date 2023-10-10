@@ -12,6 +12,7 @@ const Home = lazy(() => import('@src/pages/components/Home'))
 const NotFound = lazy(() => import('@src/pages/NotFound'))
 const LoginPage = lazy(() => import('@src/auth/components/loginPage'))
 const SignupPage = lazy(() => import('@src/auth/components/signupPage'))
+const Connect = lazy(() => import('@src/pages/components/connect/connect'))
 const Project = lazy(() => import('@src/pages/components/project/project'))
 
 const Router = () => {
@@ -23,6 +24,7 @@ const Router = () => {
       </Route>
       <Route element={<ProtectedRoute />}>
         <Route path={RoutesPaths.Home} element={<Home />} />
+        <Route path={RoutesPaths.Connect} element={<Connect />} />
         <Route path={RoutesPaths.Project} element={<Project />} />
         <Route path={RoutesPaths.Connections} element={<Home />} />
         <Route path={RoutesPaths.ConnectionsPending} element={<Pendentes />} />
