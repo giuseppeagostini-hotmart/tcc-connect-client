@@ -38,6 +38,8 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Build
+        env: 
+          VITE_OPEN_IA_KEY: ${{secrets.VITE_OPEN_IA_KEY}}
         run: yarn build && cp ./dist/index.html ./dist/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v3
