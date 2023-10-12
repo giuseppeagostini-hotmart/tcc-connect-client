@@ -12,7 +12,7 @@ interface TagsProps {
   setTags: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-const Tags = ({ tags, setTags }: TagsProps) => {
+const Tags = ({ tags = [], setTags }: TagsProps) => {
   const { token } = theme.useToken()
   const [inputVisible, setInputVisible] = useState(false)
   const [inputValue, setInputValue] = useState<string>('')

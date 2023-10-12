@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Button, Steps, theme } from 'antd'
+import { Button, Form, Steps, theme } from 'antd'
 
 import SearchProfessor from './SearchProfessor/SearchProfessor'
 import Success from './Success/Success'
@@ -22,6 +22,8 @@ const Connect: React.FC = () => {
   const { token } = theme.useToken()
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
   const [buttonDisabledByTag, setButtonDisabledByTag] = useState<boolean>(true)
+  const [tags, setTags] = useState([] as string[])
+  const [form] = Form.useForm()
 
   const [current, setCurrent] = useState(0)
 
@@ -38,6 +40,9 @@ const Connect: React.FC = () => {
       <TccInfo
         setButtonDisabled={setButtonDisabled}
         setButtonDisabledByTag={setButtonDisabledByTag}
+        form={form}
+        setTags={setTags}
+        tags={tags}
       />
     ),
     1: <SearchProfessor nextFunction={next} />,

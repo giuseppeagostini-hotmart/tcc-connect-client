@@ -7,6 +7,8 @@ export interface User {
   email: string
   isProfessor: boolean
   firstTime: boolean
+  interests: string[]
+  isProfessorAvaliable: boolean
 }
 
 interface State {

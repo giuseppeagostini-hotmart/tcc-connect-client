@@ -5,8 +5,9 @@ import { OpenAI } from 'langchain/llms/openai'
 const useLLM = (key: string) =>
   useMemo(() => {
     return new OpenAI({
-      temperature: 0,
-      openAIApiKey: key
+      temperature: 0.4,
+      openAIApiKey: key,
+      modelName: 'gpt-3.5-turbo'
     })
   }, [key])
 

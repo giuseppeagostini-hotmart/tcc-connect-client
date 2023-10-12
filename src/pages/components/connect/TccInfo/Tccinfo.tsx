@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import Tags from '@src/common/components/tags/tags'
+import type { FormInstance } from 'antd'
 import { Alert, Form, Input, Spin, notification } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
@@ -14,11 +15,19 @@ import PalavraChaveLabel from '../PalavraChaveLabel/PalavraChaveLabel'
 interface TccInfoProps {
   setButtonDisabled: (prop: boolean) => void
   setButtonDisabledByTag: (prop: boolean) => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form: FormInstance<any>
+  tags: string[]
+  setTags: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-const TccInfo = ({ setButtonDisabled, setButtonDisabledByTag }: TccInfoProps) => {
-  const [form] = Form.useForm()
-  const [tags, setTags] = useState([] as string[])
+const TccInfo = ({
+  setButtonDisabled,
+  setButtonDisabledByTag,
+  form,
+  tags,
+  setTags
+}: TccInfoProps) => {
   const { mutate: mutateGetTccInfoIa, isLoading } = useGetTccInfoIA()
   const [api, contextHolder] = notification.useNotification()
 
@@ -34,7 +43,16 @@ const TccInfo = ({ setButtonDisabled, setButtonDisabledByTag }: TccInfoProps) =>
     mutateGetTccInfoIa(
       {},
       {
-        onSuccess() {},
+        onSuccess(data) {
+          const resp = JSON.parse(data.res)
+          form.setFieldsValue({
+            description: resp.description,
+            title: resp.title,
+            interests: resp.interests
+          })
+          // setTags(resp.interests)
+          setButtonDisabled(false)
+        },
         onError() {
           openNotificationError('bottomRight')
         }
@@ -67,7 +85,7 @@ const TccInfo = ({ setButtonDisabled, setButtonDisabledByTag }: TccInfoProps) =>
             layout='vertical'
             name='basic_tcc_info'
             autoComplete='off'
-            onFieldsChange={() => onFormsChange()}>
+            onValuesChange={() => onFormsChange()}>
             <Form.Item
               label='Titulo'
               name='title'
@@ -80,7 +98,7 @@ const TccInfo = ({ setButtonDisabled, setButtonDisabledByTag }: TccInfoProps) =>
               name='description'
               rules={[{ required: true, message: 'Insira uma breve descrição do seu projeto!' }]}>
               <TextArea
-                rows={3}
+                rows={4}
                 maxLength={2000}
                 placeholder='Insira uma breve descrição do seu projeto'
               />
