@@ -50,7 +50,7 @@ const TccInfo = ({
             title: resp.title,
             interests: resp.interests
           })
-          // setTags(resp.interests)
+          setTags(resp.interests)
           setButtonDisabled(false)
         },
         onError() {
@@ -75,7 +75,7 @@ const TccInfo = ({
     <>
       {contextHolder}
       <div className='p-4'>
-        <Spin spinning={isLoading}>
+        <Spin spinning={isLoading} tip='Aguarde um instante enquanto geramos seu tema.'>
           <p className='mt-0 mb-6 text-base text-start'>
             Insira os detalhes do seu TCC para compartilhar com seu professor quando se conectar:
           </p>

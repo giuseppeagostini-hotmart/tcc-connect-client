@@ -70,7 +70,7 @@ const ModalContent = ({
 
     updateUser.mutate(payload, {
       onSuccess(data) {
-        dispatchUser(data)
+        dispatchUser(data.data)
         openNotificationSuccess('bottomRight')
       },
       onError(error) {

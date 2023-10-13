@@ -1,9 +1,12 @@
-/* eslint-disable no-console */
 import { useState } from 'react'
 
-import { Alert, Modal, Spin, Table } from 'antd'
+import { InvitesEndpoint } from '@src/auth/constants/authEndpoints'
+import { useQueryClient } from '@tanstack/react-query'
+import { Alert, Modal, Spin, Table, notification } from 'antd'
+import type { NotificationPlacement } from 'antd/es/notification/interface'
 
 import { AlertSearchProfessorButton, AlertSearchProfessorDescription } from './constants'
+import useCreateInvite from './hook/useCreateInvite/useCreateInvite'
 import useGetColumns from './hook/useGetColumns/useGetColumns'
 import useGetProfessor from './hook/useGetProfessor/useGetProfessor'
 
@@ -25,22 +28,53 @@ const SearchProfessor = ({ nextFunction }: SearchProfessorProps) => {
   const { data: professors, isLoading } = useGetProfessor()
   const [selectedItem, setSelectedItem] = useState<SelectedItemProps | undefined>()
   const columns = useGetColumns()
+  const { mutate: mutateCreateInvite, isLoading: createInviteloading } = useCreateInvite()
+  const [api, contextHolder] = notification.useNotification()
+  const queryClient = useQueryClient()
 
   const handleClickButton = () => {
     // eslint-disable-next-line no-console
     console.log('click!!')
   }
 
+  const openNotificationError = (placement: NotificationPlacement, error: string) => {
+    api.error({
+      message: `Ops, tivemos um problema ao enviar o convite`,
+      description: error,
+      placement
+    })
+  }
+
   const handleClickConfirm = () => {
-    nextFunction()
-    console.log(selectedItem)
+    mutateCreateInvite(
+      {
+        receiver: {
+          _id: selectedItem?.id,
+          name: selectedItem?.name
+        }
+      },
+      {
+        onSuccess() {
+          nextFunction()
+          queryClient.invalidateQueries({
+            // eslint-disable-next-line no-underscore-dangle
+            queryKey: [`${InvitesEndpoint.getInviteById}`]
+          })
+        },
+        onError(error) {
+          openNotificationError('bottomRight', error.message)
+        }
+      }
+    )
   }
 
   return (
     <>
+      {contextHolder}
       <Modal
         title={<p className='mr-3 my-0'>{`Convide ${selectedItem?.name} para orienta-lo(a)`}</p>}
         open={isOpenModal}
+        okButtonProps={{ loading: createInviteloading }}
         onOk={() => handleClickConfirm()}
         onCancel={() => setIsOpenModal(false)}
         okText='Confirmar'

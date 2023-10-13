@@ -23,3 +23,8 @@ export const UsersEndpoint = {
   getProfessor: `${baseURL}/users/professors`,
   updateUser: `${baseURL}/users/:id`
 }
+
+export const InvitesEndpoint = {
+  createInvite: `${baseURL}/invites/create`,
+  getInviteById: `${baseURL}/invites/:id`
+}
