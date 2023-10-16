@@ -22,6 +22,7 @@ const Connect: React.FC = () => {
   const { token } = theme.useToken()
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
   const [buttonDisabledByTag, setButtonDisabledByTag] = useState<boolean>(true)
+  const [buttonDisabledByLoading, setButtonDisabledByLoading] = useState<boolean>(true)
   const [tags, setTags] = useState([] as string[])
   const [form] = Form.useForm()
 
@@ -40,6 +41,7 @@ const Connect: React.FC = () => {
       <TccInfo
         setButtonDisabled={setButtonDisabled}
         setButtonDisabledByTag={setButtonDisabledByTag}
+        setButtonDisabledByLoading={setButtonDisabledByLoading}
         form={form}
         setTags={setTags}
         tags={tags}
@@ -72,7 +74,7 @@ const Connect: React.FC = () => {
         )}
         {current === 0 && (
           <Button
-            disabled={buttonDisabled || buttonDisabledByTag}
+            disabled={buttonDisabled || buttonDisabledByTag || buttonDisabledByLoading}
             type='primary'
             onClick={() => next()}>
             Próximo

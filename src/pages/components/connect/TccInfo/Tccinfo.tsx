@@ -15,6 +15,7 @@ import PalavraChaveLabel from '../PalavraChaveLabel/PalavraChaveLabel'
 interface TccInfoProps {
   setButtonDisabled: (prop: boolean) => void
   setButtonDisabledByTag: (prop: boolean) => void
+  setButtonDisabledByLoading: (prop: boolean) => void
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: FormInstance<any>
   tags: string[]
@@ -24,6 +25,7 @@ interface TccInfoProps {
 const TccInfo = ({
   setButtonDisabled,
   setButtonDisabledByTag,
+  setButtonDisabledByLoading,
   form,
   tags,
   setTags
@@ -38,6 +40,10 @@ const TccInfo = ({
       placement
     })
   }
+
+  useEffect(() => {
+    setButtonDisabledByLoading(isLoading)
+  }, [isLoading, setButtonDisabledByLoading])
 
   const handleClickButton = () => {
     mutateGetTccInfoIa(
