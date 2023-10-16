@@ -31,7 +31,7 @@ const Pendentes: React.FC = () => {
       </h1>
       <p className='font-sans text-gray-500 mb-7 '>
         Verifique o status dos convites enviados aos orientadores. Acompanhe facilmente se foram
-        aceitos, pendentes ou recusados.
+        aceitos, recusados ou se ainda estão pendentes.
       </p>
       {data.data.map((item: CreateInvitePayload) => {
         return (
