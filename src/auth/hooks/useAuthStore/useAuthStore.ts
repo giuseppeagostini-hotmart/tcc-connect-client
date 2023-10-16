@@ -9,6 +9,7 @@ export interface User {
   firstTime: boolean
   interests: string[]
   isProfessorAvaliable: boolean
+  institution: string
 }
 
 interface State {
