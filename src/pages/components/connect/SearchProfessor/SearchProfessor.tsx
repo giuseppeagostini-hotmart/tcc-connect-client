@@ -32,17 +32,24 @@ const SearchProfessor = ({ nextFunction }: SearchProfessorProps) => {
   const [api, contextHolder] = notification.useNotification()
   const queryClient = useQueryClient()
 
-  const handleClickButton = () => {
-    // eslint-disable-next-line no-console
-    console.log('click!!')
-  }
-
-  const openNotificationError = (placement: NotificationPlacement, error: string) => {
+  const openNotificationError = (
+    placement: NotificationPlacement,
+    error: string,
+    message: string
+  ) => {
     api.error({
-      message: `Ops, tivemos um problema ao enviar o convite`,
+      message,
       description: error,
       placement
     })
+  }
+
+  const handleClickButton = () => {
+    openNotificationError(
+      'bottomRight',
+      'Tente novamente mais tarde',
+      'Ops, tivemos um problema buscar um professor'
+    )
   }
 
   const handleClickConfirm = () => {
@@ -62,7 +69,11 @@ const SearchProfessor = ({ nextFunction }: SearchProfessorProps) => {
           })
         },
         onError(error) {
-          openNotificationError('bottomRight', error.message)
+          openNotificationError(
+            'bottomRight',
+            error.message,
+            'Ops, tivemos um problema ao enviar o convite'
+          )
         }
       }
     )

@@ -1,4 +1,4 @@
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import { LogoutOutlined, UserOutlined, MailOutlined } from '@ant-design/icons'
 import logo from '@src/assets/logoo.png'
 import useLogout from '@src/auth/hooks/useLogout/useLogout'
 import { getItem } from '@src/common/utils'
@@ -10,6 +10,7 @@ import { AVATAR_LABELS } from '../constants'
 const { Header } = Layout
 
 const AVATAR_ITEMS = [
+  getItem(AVATAR_LABELS.invites.label, AVATAR_LABELS.invites.key, <MailOutlined />),
   getItem(AVATAR_LABELS.logout.label, AVATAR_LABELS.logout.key, <LogoutOutlined />)
 ]
 
@@ -29,6 +30,10 @@ const BaseLayoutHeader: React.FC = () => {
     if (event.key === AVATAR_LABELS.logout.key) {
       logout()
       navigate('/login')
+    }
+
+    if (event.key === AVATAR_LABELS.invites.key) {
+      navigate('/connections/pending')
     }
   }
 
