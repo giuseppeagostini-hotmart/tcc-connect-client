@@ -29,6 +29,8 @@ interface SearchProfessorProps {
 
 const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [listaFiltrada, setListaFiltrada] = useState([])
+
   const { data: professors, isLoading } = useGetProfessor()
   const [selectedItem, setSelectedItem] = useState<SelectedItemProps | undefined>()
   const columns = useGetColumns()
@@ -68,7 +70,14 @@ const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) =>
           const resp = JSON.parse(data.resp.text)
           if (!resp || resp.recommended_professors.length === 0) {
             openNotificationWarning('bottomRight')
+
+            return
           }
+
+          const idsSugeridos = new Set(resp.recommended_professors.map((item: any) => item.id))
+          const newListProff = professors.filter((item: any) => idsSugeridos.has(item.key))
+
+          setListaFiltrada(newListProff)
         },
         onError() {
           openNotificationError(
@@ -128,7 +137,7 @@ const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) =>
       <Spin spinning={isLoading || mutateIsLoading} tip='Aguarde um instante'>
         <Table
           columns={columns}
-          dataSource={professors}
+          dataSource={listaFiltrada.length === 0 ? professors : listaFiltrada}
           pagination={{ defaultPageSize: 5 }}
           rowClassName={() => 'table-row-config'}
           onRow={(record) => {
