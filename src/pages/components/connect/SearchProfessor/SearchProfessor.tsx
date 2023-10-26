@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
 
+import { ArrowLeftOutlined } from '@ant-design/icons'
 import { InvitesEndpoint } from '@src/auth/constants/authEndpoints'
 import { useQueryClient } from '@tanstack/react-query'
-import { Alert, Modal, Spin, Table, notification } from 'antd'
+import { Alert, Button, Modal, Spin, Table, notification } from 'antd'
 import type { NotificationPlacement } from 'antd/es/notification/interface'
 
 import { AlertSearchProfessorButton, AlertSearchProfessorDescription } from './constants'
@@ -30,7 +31,6 @@ interface SearchProfessorProps {
 const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [listaFiltrada, setListaFiltrada] = useState([])
-
   const { data: professors, isLoading } = useGetProfessor()
   const [selectedItem, setSelectedItem] = useState<SelectedItemProps | undefined>()
   const columns = useGetColumns()
@@ -48,6 +48,10 @@ const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) =>
       description: error,
       placement
     })
+  }
+
+  const handleClickResetFilter = () => {
+    setListaFiltrada([])
   }
 
   const openNotificationWarning = (placement: NotificationPlacement) => {
@@ -135,6 +139,17 @@ const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) =>
         </p>
       </Modal>
       <Spin spinning={isLoading || mutateIsLoading} tip='Aguarde um instante'>
+        {listaFiltrada.length !== 0 && (
+          <div className='flex ml-4'>
+            <p className='mr-4'>
+              Aqui estão os professores que mais recomendamos para você. Se desejar visualizar a
+              lista original, clique no botão ao lado.
+            </p>
+            <Button className='mr-5' size='small' type='primary' onClick={handleClickResetFilter}>
+              <ArrowLeftOutlined />
+            </Button>
+          </div>
+        )}
         <Table
           columns={columns}
           dataSource={listaFiltrada.length === 0 ? professors : listaFiltrada}
