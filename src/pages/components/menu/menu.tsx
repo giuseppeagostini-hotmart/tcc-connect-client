@@ -23,12 +23,12 @@ export const professorItems: MenuItem[] = [
 
 const studentItems: MenuItem[] = [
   getItem('Inicio', RoutesPaths.Home, <SmileOutlined />),
-  getItem('Conectar', RoutesPaths.Connect, <UserSwitchOutlined />),
-  getItem('Projeto', RoutesPaths.Project, <FileTextOutlined />),
-  getItem('Conexões', RoutesPaths.Connections, <UserOutlined />, [
-    getItem('Vizualizar', RoutesPaths.ConnectionsSearch, <SearchOutlined />),
-    getItem('Pendentes', RoutesPaths.ConnectionsPending, <QuestionCircleOutlined />)
-  ])
+  getItem('Conectar', RoutesPaths.Connect, <UserSwitchOutlined />, [
+    getItem('Associar', RoutesPaths.Connect, <UserSwitchOutlined />),
+    getItem('Orientadores', RoutesPaths.ConnectionsSearch, <SearchOutlined />),
+    getItem('Convites', RoutesPaths.ConnectionsPending, <QuestionCircleOutlined />)
+  ]),
+  getItem('Projeto', RoutesPaths.Project, <FileTextOutlined />)
 ]
 
 interface MenuAntdProps {
