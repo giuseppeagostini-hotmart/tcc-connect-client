@@ -31,7 +31,7 @@ const SignupPage = () => {
   const { mutate: mutateLogin, isLoading: isLoadingLogin } = useLogin()
   const [api, contextHolder] = notification.useNotification()
   const navigate = useNavigate()
-  const [value, setValue] = useState(1)
+  const [value, setValue] = useState(2)
 
   const openNotificationError = (placement: NotificationPlacement, error: string) => {
     api.error({
@@ -131,7 +131,9 @@ const SignupPage = () => {
             </Form.Item>
 
             <Radio.Group className='ml-1' onChange={onChange} value={value}>
-              <Radio value={1}>Sou professor</Radio>
+              <Radio disabled value={1}>
+                Sou professor
+              </Radio>
               <Radio value={2}>Sou Aluno</Radio>
             </Radio.Group>
 
