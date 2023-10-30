@@ -23,7 +23,7 @@ export const professorItems: MenuItem[] = [
 
 const studentItems: MenuItem[] = [
   getItem('Inicio', RoutesPaths.Home, <SmileOutlined />),
-  getItem('Conectar', RoutesPaths.Connect, <UserSwitchOutlined />, [
+  getItem('Conectar', RoutesPaths.Connections, <UserSwitchOutlined />, [
     getItem('Associar', RoutesPaths.Connect, <UserSwitchOutlined />),
     getItem('Orientadores', RoutesPaths.ConnectionsSearch, <SearchOutlined />),
     getItem('Convites', RoutesPaths.ConnectionsPending, <QuestionCircleOutlined />)
