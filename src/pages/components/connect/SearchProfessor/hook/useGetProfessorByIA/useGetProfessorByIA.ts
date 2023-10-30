@@ -8,17 +8,16 @@ import useLLMProfessor from '../../../TccInfo/hooks/useLLM/useLLMProfessor'
 type GetProfessorByIaProps = {
   professorList: string
   tags: string[]
-  title: string
 }
 
 const useGetProfessorByIA = () => {
   const llm = useLLMProfessor(import.meta.env.VITE_OPEN_IA_KEY)
 
-  return useMutation(({ professorList, tags, title }: GetProfessorByIaProps) => {
+  return useMutation(({ professorList, tags }: GetProfessorByIaProps) => {
     const prompt = ChatPromptTemplate.fromMessages([
       [
         'system',
-        `[no prose][Output only JSON] Atue como um especialista em "Orientação de TCC" e gere um JSON (somente com o id do professor) recomendando os professores mais adequados com base nas informações do título e palavras-chave (interesses) fornecidas pelo aluno (usuário). Essa recomendação deve ser feita cruzando os dados do título e palavras-chave do aluno com as áreas de interesse dos professores na nossa base de dados. Os dados não precisam ser exatamente iguais, mas devem estar relacionados. Por exemplo, se um professor tem uma área de interesse em "Frontend" e o usuário tem uma palavra-chave de "desenvolvimento web", eles estão relacionados e esse professor deve ser considerado. Lembrando que isso foi somente um exemplo, leve isso para outros casos também.
+        `[no prose][Output only JSON] Desempenhe o papel de um especialista em 'Orientação de TCC' e crie um JSON contendo apenas o ID do professor, com o objetivo de recomendar os professores mais adequados com base nas palavras-chave (interesses) fornecidas pelo aluno (usuário). Essa recomendação será efetuada ao relacionar as palavras-chave do aluno com as áreas de interesse dos professores em nossa base de dados. As correspondências não precisam ser exatas, mas devem indicar uma relação. Por exemplo, se um professor tem uma área de interesse em 'Frontend' e o aluno utiliza a palavra-chave 'desenvolvimento web', isso constitui uma relação e o professor deve ser considerado. É importante ressaltar que o exemplo mencionado é apenas um caso ilustrativo; termos que possuem relação entre si devem ser levados em consideração.
         Campos do JSON: id do professor recomendado (id).
         Caso nao tenha professores para recomendar, retornar um array vazio ([])
         Utilize a seguinte base de dados de professores: {professorList}`
@@ -28,7 +27,7 @@ const useGetProfessorByIA = () => {
 
     const chain = new LLMChain({ llm, prompt })
 
-    return getProfessorByIAClient({ chain, professorList, tags, title })
+    return getProfessorByIAClient({ chain, professorList, tags })
   })
 }
 

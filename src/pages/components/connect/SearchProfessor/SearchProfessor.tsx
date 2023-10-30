@@ -25,10 +25,9 @@ interface SelectedItemProps {
 interface SearchProfessorProps {
   nextFunction: () => void
   tags: string[]
-  title: string
 }
 
-const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) => {
+const SearchProfessor = ({ nextFunction, tags }: SearchProfessorProps) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [listaFiltrada, setListaFiltrada] = useState([])
   const { data: professors, isLoading } = useGetProfessor()
@@ -68,7 +67,7 @@ const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) =>
     })
 
     mutateGetProfessorIA(
-      { professorList: JSON.stringify(professorList), tags, title },
+      { professorList: JSON.stringify(professorList), tags },
       {
         onSuccess(data) {
           const resp = JSON.parse(data.resp.text)
@@ -140,7 +139,7 @@ const SearchProfessor = ({ nextFunction, tags, title }: SearchProfessorProps) =>
       </Modal>
       <Spin spinning={isLoading || mutateIsLoading} tip='Aguarde um instante'>
         {listaFiltrada.length !== 0 && (
-          <div className='flex ml-4'>
+          <div className='flex ml-4 items-center'>
             <p className='mr-4'>
               Aqui estão os professores que mais recomendamos para você. Se desejar visualizar a
               lista original, clique no botão ao lado.

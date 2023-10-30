@@ -36,8 +36,6 @@ const Connect: React.FC = () => {
     setCurrent(current - 1)
   }
 
-  const titleValue = form.getFieldValue('title')
-
   const components: { [key: number]: JSX.Element } = {
     0: (
       <TccInfo
@@ -49,7 +47,7 @@ const Connect: React.FC = () => {
         tags={tags}
       />
     ),
-    1: <SearchProfessor nextFunction={next} tags={tags} title={titleValue || ''} />,
+    1: <SearchProfessor nextFunction={next} tags={tags} />,
     2: <Success />
   }
 
