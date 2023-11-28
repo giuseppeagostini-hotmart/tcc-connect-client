@@ -22,6 +22,7 @@ const ContentHome: React.FC = () => {
   })
 
   const handleClick = () => {
+    sessionStorage.setItem('key', 'value')
     navigate('/connect')
   }
 
