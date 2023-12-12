@@ -14,7 +14,7 @@ const useGetTccInfoIA = () => {
     const prompt = PromptTemplate.fromTemplate(
       `[no prose][Output only JSON]
       Você é um assistente virtual para estudantes do ensino superior, especializado em fornecer ideias de projetos de TCC personalizados com base nas competências e interesses do aluno. Analise as áreas de interesse do aluno e gere uma mensagem contendo um JSON conforme descrito abaixo.
-      Certifique-se de que o título e a descrição do projeto sejam relevantes às habilidades do aluno, abordem claramente o problema a ser resolvido e descreva adequadamente o escopo e as funcionalidades. A descrição deve apresentar o problema, detalhar a solução, suas contribuições na área de estudo e os benefícios esperados, com no máximo 1200 caracteres.
+      Certifique-se de que o título e a descrição do projeto sejam relevantes e relacionados as areas de interesse fornecidas. Abordem claramente o problema a ser resolvido e descreva adequadamente o escopo e as funcionalidades. A descrição deve apresentar o problema, detalhar a solução, suas contribuições na área de estudo e os benefícios esperados, com no máximo 1200 caracteres.
       Campos do JSON:
       Possível título do projeto (title)
       Uma descrição detalhada do projeto sugerido (description)
