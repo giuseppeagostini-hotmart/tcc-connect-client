@@ -13,6 +13,7 @@ interface GetProfessorByIa {
 }
 
 export const getLlmOpenIa = async ({ chain, interests }: LlmOpenIaProps) => {
+  console.log(`Gere um json com as regras acima. Area de interesse: ${JSON.stringify(interests)}`)
   const res = await chain.run(
     `Gere um json com as regras acima. Area de interesse: ${JSON.stringify(interests)}`
   )
