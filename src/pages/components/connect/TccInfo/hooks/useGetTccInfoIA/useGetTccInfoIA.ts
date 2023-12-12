@@ -20,7 +20,8 @@ const useGetTccInfoIA = () => {
       Uma descrição detalhada do projeto sugerido (description)
       Um array composto por strings de palavras-chave relacionadas ao projeto sugerido (interests)
       Sua resposta deve estar diretamente relacionada as areas de interesses que foram fornecidas!
-      Sua resposta nao pode ser "Sistema de recomendação de filmes baseado em preferências do usuário", procure recomendar sempre temas que estao DIRETAMENTE relacionados as areas de interesses que vao ser fornecidas!`
+      Sua resposta nao pode ser "Sistema de recomendação de filmes baseado em preferências do usuário", procure recomendar sempre temas que estao DIRETAMENTE relacionados as areas de interesses que vao ser fornecidas!
+      Area de interesse: ${JSON.stringify(interests)}`
     )
 
     const chain = new LLMChain({ llm, prompt })
