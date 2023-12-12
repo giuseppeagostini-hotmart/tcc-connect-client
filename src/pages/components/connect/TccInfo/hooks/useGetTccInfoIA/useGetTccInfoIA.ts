@@ -18,7 +18,8 @@ const useGetTccInfoIA = () => {
       Campos do JSON:
       Possível título do projeto (title)
       Uma descrição detalhada do projeto sugerido (description)
-      Um array composto por strings de palavras-chave relacionadas ao projeto sugerido (interests)`
+      Um array composto por strings de palavras-chave relacionadas ao projeto sugerido (interests)
+      Sua resposta deve estar diretamente relacionada as areas de interesses que foram fornecidas!`
     )
 
     const chain = new LLMChain({ llm, prompt })
